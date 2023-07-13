@@ -8,7 +8,7 @@ enum MessageOne {
     ChangeColor(i32, i32, i32),
 }
 fn show_message(msg: MessageOne) {
-    println!("{}", msg);
+    println!("{}", msg::Quit);
 }
 
 fn exercise1() {
