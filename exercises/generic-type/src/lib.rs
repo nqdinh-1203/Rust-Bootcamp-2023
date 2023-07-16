@@ -1,19 +1,22 @@
 // Exercise 1 
 // Implement struct Point to make it work.
 // Make it compile
+struct Position<T> {
+    x: T,
+    y: T
+}
+
 fn exercise1() {
     let integer = Position { x: 5, y: 10 };
     let float = Position { x: 1.0, y: 4.0 };
 }
 
-
-
 // Exercise 2
 // Modify this struct to make the code work
 // Make it compile
-struct Point<T> {
+struct Point<T, V> {
     x: T,
-    y: T,
+    y: V,
 }
 
 fn exercise2() {
@@ -26,12 +29,12 @@ fn exercise2() {
 // Exercise 3
 // Make it compile
 // Add generic for Val to make the code work, DON'T modify the code in `main`.
-struct Val {
-    val: f64,
+struct Val<T> {
+    val: T,
 }
 
-impl Val {
-    fn value(&self) -> &f64 {
+impl Val<T> {
+    fn value(&self) -> &T {
         &self.val
     }
 }
