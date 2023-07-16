@@ -1,24 +1,37 @@
+use std::io;
+
 fn main() {
-    let values: Vec<f64> = vec![
-        2817.42, 2162.17, 3756.57, 2817.42, -2817.42, 946.9, 2817.42, 964.42, 795.43, 3756.57,
-        139.34, 903.58, -3756.57, 939.14, 828.04, 1120.04, 604.03, 3354.74, 2748.06, 1470.8,
-        4695.71, 71.11, 2391.48, 331.29, 1214.69, 863.52, 7810.01,
-    ];
+    exercise8();
+}
 
-    let values_number = values.len();
-    println!("{:?}", values);
+fn exercise7() {
+    let mut v: Vec<String> = Vec::new();
+    {
+        let chars = [b'x', b'y', b'z'];
+        let s: &str = std::str::from_utf8(&chars).unwrap();
+        v.push(s.to_owned());
+    }
+    println!("{:?}", v);
+}
 
-    let additions: Vec<usize> = vec![0];
+fn exercise8() {
+    let mut accounting: Vec<String> = vec!["Alice".to_string(), "Ben".to_string()];
 
-    println!("{:?}", values_number);
+    loop {
+        let mut add_input = String::from("");
 
-    while additions.len() as u32 > 0 {
-        let mut addition: f64 = 0.0;
+        io::stdin()
+            .read_line(&mut add_input)
+            .expect("Failed to read line");
 
-        // Sumar valores en additions
-        for element_index in &additions {
-            let addition_aux = values[*element_index];
-            addition += addition_aux;
+        let add_vec: Vec<&str> = add_input.trim()[..].split_whitespace().collect();
+
+        if add_vec.len() < 1 {
+            println!("Incorrect input, try again");
+            continue;
         }
+
+        let person = add_vec[0];
+        accounting.push(person.to_string());
     }
 }
