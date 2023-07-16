@@ -1,21 +1,28 @@
-struct Student {
-    name: String,
-    age: u32
-}
-
-impl Student {
-    fn new() -> Self {
-        Self { name: "Dinh".to_string(), age: 18 }
-    }
-}
-
 fn main() {
-    let s1 = Student::new();
- 
-    let s2 = &s1.name;
+    exercise5();
+}
 
-    println!("{}", s1.name);
-    println!("{}", s2);
-    println!("{}", s1.age);
+#[derive(Debug, Clone)]
+struct Foo {
+    str_val: String,
+    int_val: i32,
+}
 
+fn exercise5() {
+    let mut foos = Vec::new();
+    foos.push(Foo {
+        str_val: "ten".to_string(),
+        int_val: 10,
+    });
+    foos.push(Foo {
+        str_val: "twenty".to_string(),
+        int_val: 20,
+    });
+
+    let moved = foos[0].clone();
+
+    let moved_field = foos[0].str_val.clone();
+
+    println!("moved = {:#?}", moved);
+    println!("moved = {}", foos[0].str_val);
 }
