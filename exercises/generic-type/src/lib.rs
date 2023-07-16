@@ -1,9 +1,9 @@
-// Exercise 1 
+// Exercise 1
 // Implement struct Point to make it work.
 // Make it compile
 struct Position<T> {
     x: T,
-    y: T
+    y: T,
 }
 
 fn exercise1() {
@@ -21,10 +21,11 @@ struct Point<T, V> {
 
 fn exercise2() {
     // DON'T modify this code.
-    let p = Point{x: 5, y : "hello".to_string()};
+    let p = Point {
+        x: 5,
+        y: "hello".to_string(),
+    };
 }
-
-
 
 // Exercise 3
 // Make it compile
@@ -33,16 +34,17 @@ struct Val<T> {
     val: T,
 }
 
-impl Val<T> {
+impl<T> Val<T> {
     fn value(&self) -> &T {
         &self.val
     }
 }
 
-
 fn exercise3() {
-    let x = Val{ val: 3.0 };
-    let y = Val{ val: "hello".to_string()};
+    let x = Val { val: 3.0 };
+    let y = Val {
+        val: "hello".to_string(),
+    };
     println!("{}, {}", x.value(), y.value());
 }
 
@@ -52,23 +54,31 @@ fn exercise3() {
 // Implementing logic
 // Run tests
 
-fn find_max<T>(collection: &[T]) -> Option<&T> {
-    todo!()
+fn find_max<T: std::cmp::PartialOrd>(collection: &[T]) -> Option<&T> {
+    if collection.len() == 0 {
+        return None;
+    }
+    let mut max: &T = &collection[0];
+    for value in collection.iter() {
+        if value > max {
+            max = value
+        }
+    }
+    return Some(max);
 }
 
-// Exercise 5 
+// Exercise 5
 // Reverse the elements in a collection
-// Make it compile 
-// Run tests 
-fn reverse_collection<T>(collection: &[T]) {
-    todo!()
+// Make it compile
+// Run tests
+fn reverse_collection<T>(collection: &mut [T]) {
+    collection.reverse();
 }
-
 
 // Exercise 6
 // Function to check if a collection contains a specific value
-fn contains_value<T>(collection: &[T], value: &T) -> bool {
-    todo!()
+fn contains_value<T: std::cmp::PartialEq>(collection: &[T], value: &T) -> bool {
+    collection.contains(value)
 }
 
 // Unit tests
@@ -143,5 +153,4 @@ mod tests {
         let empty: Vec<i32> = Vec::new();
         assert_eq!(contains_value(&empty, &5), false);
     }
-
 }
